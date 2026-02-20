@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Event Dashboard</title>
+    <style>
+        body{
+            background-color:rgb(194, 220, 232);
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: flex-start;
+            gap: 50px;
+            width:100%;
+            height:100vh;
+            margin:0;
+            animation:bgMove 5s infinite alternate;
+            border:4px solid #f4cfcf;
+        }
+        @keyframes bgMove{
+            from{background-color: rgb(194,220,232);}
+            to{background-color: rgb(244, 213, 218);}
+        }
+        .title{
+            width: 100%;
+            text-align:center;
+            margin: 0;
+            font-size: 45px;
+            color:rgb(153, 58, 193);
+            text-decoration:underline;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            word-spacing: 5px;
+        }
+        .title:hover{
+            color: cyan;
+            text-shadow: 0 0 5px cyan,0 0 10 cyan,0 0 20px cyan;
+        }
+        .box1{
+            background-color:rgba(238, 244, 243, 0.851);
+            width: 28%;
+            height:500px;
+            margin: 50px;
+            border-radius: 15px;
+            border:5px solid rgb(148, 202, 225);
+            transition: 0.3s;
+        }
+        .box1:hover{
+            transform: translateY(-10px);
+        }
+        .box2{
+            background-color:rgba(238, 244, 243, 0.851);
+            width: 49%;
+            height:500px;
+            margin: 60px 80px 100px;
+            border-radius:15px;
+            border:5px solid rgb(128, 193, 236);
+            transition: 0.3s;
+        }
+        .box2:hover{
+            transform:translate(-8px);
+            box-shadow: 0 8px 20px 
+            rgba(0,0,0,0.3);
+        }
+        .box3{
+           width: 84%;
+           height:130px;
+           background-color:rgba(238, 244, 243, 0.851) ;
+           padding: 10px 15px 20px;
+           margin-top: -120px;
+           border-radius: 15px;
+           border:5px solid rgb(128, 193, 236);
+        }
+        .box3:hover{
+           animation: jump 0.4s; 
+        }
+        @keyframes jump{
+            0%{transform: translateY(0);}
+            50%{transform: translateY(-12px);}
+            100%{transform: translateY(0);}
+        } 
+        button{
+            border:none;
+            cursor:pointer;
+            transition: 0.3s;
+        }
+        button:hover{
+            box-shadow: 0 5px 15px rgba(rgb(225, 77, 77), rgb(121, 240, 121), rgb(91, 91, 224), alpha);
+            border:2px solid rgb(83, 175, 200);
+            animation:glow 1s infinite alternate;
+        }
+        @keyframes glow{
+            from{box-shadow: 0 0 5px rgb(162, 120, 216);}
+            to{box-shadow: 0 0 20px rgb(139, 240, 252);}
+        }
+        input:focus,
+        select:focus,
+        textarea:focus{
+            outline:none;
+            border-color: rgb(160, 245, 245);
+            box-shadow: 0 0 8px rgba(62, 152, 249, 0.5);
+        }
+        /* Event Card Styling */
+.event-item {
+    display:inline-block;
+    vertical-align: top;
+    background: #f8f9fa;
+    border-left: 5px solid #5bc0de;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    border-radius: 10px;
+    position: relative;
+    width:38%;
+    height:135px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #64ee72;
+    width: 25px;
+    height: 25px;
+    border-radius: 70%;
+    padding: 0;
+    line-height: 20px;
+}
+
+.badge {
+    background: #6a82fb;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.7em;
+}
+
+.empty-msg { text-align: center; color: #888; margin-top: 50px; }
+
+.key-display {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+    </style>
+</head>
+<body>
+    <h1 class="title">Smart Event Dashboard</h1>
+        <div class="box1">
+            <form id="eventform">
+            <h1 style="margin:10px; color:rgb(17, 97, 171);">Add New Event</h1><br>
+            <label style="margin:10px;color:darkslateblue;">Event Title:</label><br>
+            <input id="title" type="text" placeholder="Enter your name:" style="width:400px;padding:10px;
+            border-radius: 5px; margin: 10px;color:blueviolet;font-weight: bold;" required><br>
+            <label style="margin:10px;color:darkslateblue;">Event Date:</label><br>
+            <input id="date" type="date" value="date" style="width:400px;padding:10px;
+            border-radius: 5px; margin: 10px; color:blueviolet;font-weight: bold;"required><br>
+            <label style="margin:10px;color:darkslateblue;">Category:</label><br>
+            <select id="category" style="width:400px;padding:10px;
+            border-radius: 5px; margin: 10px;color:blueviolet;font-weight: bold;"required><br>
+                <option>conference</option>
+                <option>work shop</option>
+                <option>meeting</option>
+                <option>birthday</option>
+            </select><br>
+            <label style="margin:10px;color:darkslateblue;">Description:</label><br>
+            <textarea id="desc" style="height:80px; width:400px; border-radius:5px;
+            margin:10px;font-weight: bold;" required></textarea><br>
+            <button type="submit" style="margin:10px;width:390px;height:30px; border-radius: 5px;background-color: powderblue;
+            box-shadow: 0px 0px 10px 2px rgb(173, 231, 244);"
+            onclick="addEvent()">Add Event</button>
+            </form>
+        </div>
+        <div class="box2">
+            <h1 style="margin:10px; color:rgb(255, 127, 214); font-weight:28px;">MY Events</h1>
+            <button  id="clear all btn"style=" margin:15px; padding:5px; width: 450px; height:40px;color:rgb(227, 157, 227);
+            border-radius:5px;box-shadow:0px 0px 10px 2px #e8a8d6;font-weight: bold; font-size: 23px;">Clear All Events:</button>
+            <button id="add sample btn"style=" margin:0px;  padding:5px; width:450px; height:40px; color:rgb(227, 157, 227);
+            border-radius:5px;box-shadow:0px 0px 10px 2px rgb(247, 165, 208); font-weight: bold;font-size: 23px;">Add sample Events:</button>
+           <div id="eventContainer">
+            <p class="empty-msg">No events yet.add your first event !</p>
+           </div>
+        </div>
+        <div class="box3">
+            <h2 style="margin:0px; color:rgb(66, 33, 77);">DOM Manipulation Demo</h2><br>
+            <div id="property Demo">
+                <!-- comparison logic will be injected here via js  -->
+            </div>
+            <button style="padding:10px;width:1600px;height:45px; border-radius: 5px;
+            text-align:start; margin:5px;box-shadow: 0px 0px 10px 2px rgb(145, 217, 233);"
+            ><strong>you pressed:</strong>
+        <span id="key pressed">None</span></button><br><br>
+        </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+const form = document.getElementById("eventform");
+const container = document.getElementById("eventContainer");
+const clearBtn = document.getElementById("clear all btn");
+const sampleBtn = document.getElementById("add sample btn");
+const keyDisplay = document.getElementById("key pressed");
+
+
+// RESPONSIVE LAYOUT (without changing CSS)
+function makeResponsive() {
+
+    if (window.innerWidth <= 768) {
+        document.body.style.flexDirection = "column";
+        document.body.style.alignItems = "center";
+        document.body.style.gap = "20px";
+    } 
+    else {
+        document.body.style.flexDirection = "row";
+    }
+}
+
+window.addEventListener("resize", makeResponsive);
+makeResponsive();
+
+
+// ADD EVENT
+form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value.trim();
+    const date = document.getElementById("date").value;
+    const category = document.getElementById("category").value;
+    const desc = document.getElementById("desc").value.trim();
+
+    if (!title || !date) return;
+
+    const card = document.createElement("div");
+    card.className = "event-item";
+
+    card.innerHTML = `
+        <h3>${title}</h3>
+        <p><strong>${category}</strong></p>
+        <p>Date: ${date}</p>
+        <p>${desc}</p>
+        <button class="delete-btn">Delete</button>
+    `;
+
+    container.appendChild(card);
+    form.reset();
+    removeEmptyMessage();
+});
+
+
+// DELETE EVENT
+container.addEventListener("click", e => {
+    if (e.target.classList.contains("delete-btn")) {
+        e.target.parentElement.remove();
+        checkEmpty();
+    }
+});
+
+
+// CLEAR ALL EVENTS
+clearBtn.addEventListener("click", () => {
+    container.innerHTML =
+        '<p class="empty-msg">No events yet. Add your first event!</p>';
+});
+
+
+// ADD SAMPLE EVENT
+sampleBtn.addEventListener("click", () => {
+    const sample = document.createElement("div");
+    sample.className = "event-item";
+
+    sample.innerHTML = `
+        <h3>Workshop Session</h3>
+        <p><strong>Workshop</strong></p>
+        <p>Date: 2026-04-15</p>
+        <p>Learning new skills</p>
+        <button class="delete-btn">Delete</button>
+    `;
+
+    container.appendChild(sample);
+    removeEmptyMessage();
+});
+
+
+// SHOW PRESSED KEY
+window.addEventListener("keydown", e => {
+    keyDisplay.textContent = e.key;
+});
+
+
+// helpers
+function removeEmptyMessage(){
+    const msg = container.querySelector(".empty-msg");
+    if(msg) msg.remove();
+}
+
+function checkEmpty(){
+    if(container.children.length === 0){
+        container.innerHTML =
+          '<p class="empty-msg">No events yet. Add your first event!</p>';
+    }
+}
+
+});
+</script>   
+</body>
+</html>
+
